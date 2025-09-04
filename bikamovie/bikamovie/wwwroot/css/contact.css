@@ -1,0 +1,190 @@
+﻿.contact-main {
+    display: flex;
+    gap: 32px;
+    max-width: 1200px;
+    margin: 48px auto;
+    background: black;
+    border-radius: 12px;
+    box-shadow: none;
+    padding: 40px 32px;
+    flex-wrap: wrap;
+    color: #181818;
+}
+
+.contact-info,
+.contact-form-wrapper {
+    flex: 1 1 400px;
+    min-width: 340px;
+    background: #fff;
+    color: #181818;
+    border-radius: 12px;
+    padding: 32px 24px;
+}
+
+.contact-form-wrapper {
+    border-left: none !important;
+    padding-left: 32px;
+}
+
+    .contact-info h2, .contact-form-wrapper h2 {
+        text-align: center;
+        margin-bottom: 24px;
+        color: #181818;
+        font-size: 2rem;
+        font-weight: 700;
+    }
+
+.contact-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0 16px;
+    font-size: 1.2rem;
+}
+
+.contact-info li {
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #222;
+}
+
+.contact-info i {
+    color: #444;
+    font-size: 1.3em;
+    min-width: 24px;
+}
+
+.contact-form .form-group {
+    margin-bottom: 18px;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #222;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    font-size: 1rem;
+    resize: none;
+    background: #fafafa;
+    color: #181818;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+        border-color: #444;
+        outline: none;
+    }
+
+.contact-btn {
+    width: 100%;
+    padding: 12px;
+    background: #222;
+    color: #fff;
+    border: 2px solid #222;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.contact-btn:hover {
+    background: #fff;
+    color: #222;
+}
+
+html.dark-mode .contact-main {
+    background: #fff !important;
+}
+
+html.dark-mode .contact-info,
+html.dark-mode .contact-form-wrapper {
+    background: #111 !important;
+    color: #fff !important;
+}
+
+html.dark-mode .contact-info h2,
+html.dark-mode .contact-form-wrapper h2 {
+    color: #fff !important;
+}
+
+html.dark-mode .contact-info li,
+html.dark-mode .contact-form label {
+    color: #e0e0e0 !important;
+}
+
+html.dark-mode .contact-info i {
+    color: #bbb !important;
+}
+
+html.dark-mode .contact-form-wrapper {
+    border-left: 1px solid #333;
+}
+
+html.dark-mode .contact-form input,
+html.dark-mode .contact-form textarea {
+    background: #232323 !important;
+    color: #f1f1f1 !important;
+    border: 1px solid #444 !important;
+}
+
+html.dark-mode .contact-form input:focus,
+html.dark-mode .contact-form textarea:focus {
+    border-color: #fff;
+}
+
+html.dark-mode .contact-btn {
+    background: #fff !important;
+    color: #181818 !important;
+    border: 2px solid #fff !important;
+}
+
+    html.dark-mode .contact-btn:hover {
+        background: #181818 !important;
+        color: #fff !important;
+    }
+
+.contact-main {
+    background: #181818;
+    color: #181818;
+}
+
+.contact-info,
+.contact-form-wrapper {
+    background: #fff;
+    color: #181818;
+    border-radius: 12px;
+    padding: 32px 24px;
+}
+
+.contact-info h2,
+.contact-form-wrapper h2 {
+    color: #181818;
+}
+
+.contact-info li,
+.contact-form label {
+    color: #222;
+}
+
+.contact-info i {
+    color: #444;
+}
+
+.contact-form input,
+.contact-form textarea {
+    background: #fafafa;
+    color: #181818;
+    border: 1px solid #bbb;
+}
+

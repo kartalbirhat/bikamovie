@@ -1,0 +1,24 @@
+﻿@model IEnumerable<bikamovie.Models.Film>
+
+@{
+    ViewData["Title"] = "Filmler";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/filmler.css" />
+}
+
+<div class="filmler-container">
+    <h1 class="filmler-title">Tüm Filmler</h1>
+    <div class="filmler-grid">
+        @foreach (var film in Model)
+        {
+            <div class="film-card">
+                <a href="@Url.Action("Detay", "Movie", new { id = film.Id })" style="text-decoration:none;color:inherit;">
+                    <img src="@film.GorselUrl" alt="@film.Ad" class="film-poster" />
+                </a>
+                <div class="film-title">@film.Ad</div>
+                <div class="film-year">@film.CikisYili</div>
+            </div>
+        }
+    </div>
+</div>

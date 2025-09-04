@@ -1,0 +1,131 @@
+﻿@model bikamovie.Models.FilmDetayViewModel
+@section Styles {
+    <link rel="stylesheet" href="~/css/detay.css" />
+}
+@{
+    ViewData["Title"] = "Filmler";
+    string sureText = "";
+    if (Model.Film.Sure.HasValue)
+    {
+        int sure = (int)Model.Film.Sure.Value;
+        int saat = sure / 60;
+        int dakika = sure % 60;
+        sureText = saat > 0
+            ? $"{saat} saat{(dakika > 0 ? $" {dakika} dakika" : "")}"
+            : $"{dakika} dakika";
+    }
+    var comments = Model.Film.Comments?.OrderByDescending(c => c.CreatedAt).ToList() ?? new List<bikamovie.Models.Comment>();
+    int showCount = 3;
+}
+
+@if (Model?.Film != null)
+{
+    <div class="film-details-card">
+        <div style="display:flex;gap:32px;align-items:flex-start;">
+            <img src="@Model.Film.GorselUrl" style="width:350px; border-radius:20px;" alt="@Model.Film.Ad" />
+            <div>
+                <h2>@Model.Film.Ad</h2>
+                <p><strong>Konu:</strong> @Model.Film.Konu</p>
+                <p><strong>Yönetmen:</strong> @Model.Film.Yonetmen</p>
+                <p><strong>Tür:</strong> @Model.Film.Tur</p>
+                <p><strong>Süre:</strong> @sureText</p>
+                <p><strong>Çıkış Yılı:</strong> @Model.Film.CikisYili</p>
+                <p>
+                    <span class="imdb-badge">
+                        IMDb @(Model.Film.IMDb.HasValue
+                                            ? Model.Film.IMDb.Value.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture)
+                                        : "-")
+                </span>
+            </p>
+            @if (User.Identity.IsAuthenticated)
+{
+    if (Model.IsFavorite)
+    {
+        <form method="post" asp-action="RemoveFromFavorites" asp-controller="Movie" style="margin-top:12px;">
+            <input type="hidden" name="filmId" value="@Model.Film.Id" />
+            <button type="submit" class="favorite-btn">Favorilerden Kaldır</button>
+        </form>
+    }
+    else
+    {
+        <form method="post" asp-action="AddToFavorites" asp-controller="Movie" style="margin-top:12px;">
+            <input type="hidden" name="filmId" value="@Model.Film.Id" />
+            <button type="submit" class="favorite-btn">Favorilere Ekle</button>
+        </form>
+    }
+}
+            </div>
+        </div>
+    </div>
+
+    <h4 class="comment-title">Yorumlar</h4>
+    <div class="comment-section">
+        @if (comments.Any())
+        {
+            for (int i = 0; i < comments.Count; i++)
+            {
+                var comment = comments[i];
+                var isHidden = i >= showCount ? "style='display:none'" : "";
+                <div class="comment-card" data-index="@i" @Html.Raw(isHidden)>
+                    <div class="comment-header">
+                        <span class="comment-user">@comment.UserName</span>
+                        <span class="comment-date">@comment.CreatedAt.ToString("dd.MM.yyyy HH:mm")</span>
+                    </div>
+                    <div class="comment-text">@comment.Text</div>
+                </div>
+            }
+            if (comments.Count > showCount)
+            {
+                <button id="show-more-comments" class="more-btn" type="button" style="margin-top:12px;">Daha Fazla Yorum</button>
+                <button id="show-less-comments" class="less-btn" type="button" style="margin-top:12px; display:none;">Daha Az Yorum</button>
+            }
+        }
+        else
+        {
+            <p>Henüz yorum yok.</p>
+        }
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <form method="post" asp-action="AddComment" asp-controller="Movie" class="comment-form">
+                <input type="hidden" name="filmId" value="@Model.Film.Id" />
+                <textarea name="text" required placeholder="Yorumunuzu yazın..."></textarea>
+                <button type="submit" class="comment-btn">Yorum Yap</button>
+            </form>
+        }
+        else
+        {
+            <p>Yorum yapmak için giriş yapmalısınız.</p>
+        }
+    </div>
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var showMoreBtn = document.getElementById("show-more-comments");
+            var showLessBtn = document.getElementById("show-less-comments");
+            var showCount = 3;
+            var allCards = document.querySelectorAll(".comment-card");
+
+            if (showMoreBtn) {
+                showMoreBtn.addEventListener("click", function () {
+                    allCards.forEach(function (el) {
+                        el.style.display = "";
+                    });
+                    showMoreBtn.style.display = "none";
+                    if (showLessBtn) showLessBtn.style.display = "";
+                });
+            }
+            if (showLessBtn) {
+                showLessBtn.addEventListener("click", function () {
+                    allCards.forEach(function (el, idx) {
+                        el.style.display = idx < showCount ? "" : "none";
+                    });
+                    showLessBtn.style.display = "none";
+                    if (showMoreBtn) showMoreBtn.style.display = "";
+                });
+            }
+        });
+    </script>
+}

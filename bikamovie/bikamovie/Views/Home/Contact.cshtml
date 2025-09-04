@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "İletişim";
+}
+<link rel="stylesheet" href="~/css/contact.css" />
+
+<div class="contact-main">
+    <div class="contact-info">
+        <h2><i class="fa fa-envelope"></i> İletişim Bilgileri</h2>
+        <ul>
+            <li><i class="fa fa-map-marker"></i> <b>Adres:</b> Mardin / Türkiye</li>
+            <li><i class="fa fa-phone"></i> <b>Telefon:</b> +90 544 308 03 33</li>
+            <li><i class="fa fa-envelope"></i> <b>E-posta:</b> birhatkartal@hotmail.com</li>
+            <li><i class="fa fa-user"></i> <b>Kurucu:</b> Birhat Kartal</li>
+        </ul>
+    </div>
+    <div class="contact-form-wrapper">
+        <h2><i class="fa fa-comments"></i> Bize Ulaşın</h2>
+        <form class="contact-form" method="post">
+            <div class="form-group">
+                <label for="name">Adınız</label>
+                <input type="text" id="name" name="name" placeholder="Adınızı girin" required />
+            </div>
+            <div class="form-group">
+                <label for="email">E-posta</label>
+                <input type="email" id="email" name="email" placeholder="E-posta adresinizi girin" required />
+            </div>
+            <div class="form-group">
+                <label for="message">Mesajınız</label>
+                <textarea id="message" name="message" rows="5" placeholder="Mesajınızı yazın" required></textarea>
+            </div>
+            <button type="submit" class="contact-btn">Gönder</button>
+        </form>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+

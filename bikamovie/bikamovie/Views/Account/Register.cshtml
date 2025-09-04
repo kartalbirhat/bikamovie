@@ -1,0 +1,37 @@
+@model bikamovie.Models.RegisterModel
+@{
+    ViewData["Title"] = "Kayýt Ol";
+}
+<link rel="stylesheet" href="~/css/index.css" />
+
+<div class="register-center">
+    <div class="register-card">
+        <div class="register-header">
+            <img src="~/images/bikamovie.png" alt="Kayýt Ol" class="register-logo" />
+            <h3 class="register-title">Kayýt Ol</h3>
+            <p class="register-desc">Yeni bir hesap oluþturun.</p>
+        </div>
+        <form asp-action="Register" method="post" class="register-form">
+            <div class="register-group">
+                <label asp-for="Username" class="register-label">Kullanýcý Adý</label>
+                <input asp-for="Username" class="register-input" placeholder="Kullanýcý Adý" />
+                <span asp-validation-for="Username" class="register-validation"></span>
+            </div>
+            <div class="register-group">
+                <label asp-for="Email" class="register-label">E-posta</label>
+                <input asp-for="Email" class="register-input" placeholder="E-posta" />
+                <span asp-validation-for="Email" class="register-validation"></span>
+            </div>
+            <div class="register-group">
+                <label asp-for="Password" class="register-label">Þifre</label>
+                <input asp-for="Password" class="register-input" type="password" placeholder="Þifre" />
+                <span asp-validation-for="Password" class="register-validation"></span>
+            </div>
+            <button type="submit" class="register-btn">Kayýt Ol</button>
+            <div asp-validation-summary="ModelOnly" class="register-validation-summary"></div>
+        </form>
+        <div class="register-footer">
+            <a href="/Account/Login" class="register-link">Zaten hesabýnýz var mý? Giriþ Yapýn</a>
+        </div>
+    </div>
+</div>

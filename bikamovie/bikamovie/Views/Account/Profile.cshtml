@@ -1,0 +1,78 @@
+@model bikamovie.Models.ProfileModel
+@{
+    ViewData["Title"] = "Profil";
+    Layout = "_Layout";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/profile.css" />
+}
+<div class="container mt-5">
+    <div class="profile-container">
+        <div class="profile-card">
+            <div class="profile-main-row">
+                <div class="profile-avatar">
+                    <svg width="96" height="96" viewBox="0 0 96 96" fill="none">
+                        <circle cx="48" cy="48" r="44" stroke="currentColor" stroke-width="6" fill="none"/>
+                        <circle cx="48" cy="36" r="16" stroke="currentColor" stroke-width="6" fill="none"/>
+                        <path d="M24 76c0-13.255 10.745-24 24-24s24 10.745 24 24" stroke="currentColor" stroke-width="6" fill="none"/>
+                    </svg>
+                </div>
+                <div class="profile-info">
+                    <h2>Profil Bilgileri</h2>
+                    <div class="profile-username">@Model.UserName</div>
+                    <div class="profile-email">@Model.Email</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="favorites-card">
+            <h3>Favori Filmlerim</h3>
+            @if (Model.FavoriteFilms != null && Model.FavoriteFilms.Any())
+            {
+                <div class="favorites-scroll-wrapper">
+                    <button class="favorites-scroll-btn left" type="button" onclick="scrollFavorites(-1)">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <div class="favorites-scroll-list" id="favorites-scroll-list">
+                        @foreach (var film in Model.FavoriteFilms)
+                        {
+                            <a href="@Url.Action("Detay", "Movie", new { id = film.Id })" class="favorite-movie-link">
+                                <div class="favorite-movie-card">
+                                    <img src="@film.GorselUrl" alt="@film.Ad" class="favorite-movie-poster" />
+                                    <div class="favorite-movie-title">@film.Ad</div>
+                                </div>
+                            </a>
+                        }
+                    </div>
+                    <button class="favorites-scroll-btn right" type="button" onclick="scrollFavorites(1)">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                </div>
+            }
+            else
+            {
+                <p>Henüz favori film yok.</p>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function scrollProfileMovies(direction) {
+            const container = document.getElementById('profile-movie-scroll');
+            const card = container.querySelector('.movie-scroll-card');
+            if (!card) return;
+            const scrollAmount = card.offsetWidth + 24;
+            container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        }
+
+        function scrollFavorites(direction) {
+            const container = document.getElementById('favorites-scroll-list');
+            const card = container.querySelector('.favorite-movie-card');
+            if (!card) return;
+            const scrollAmount = card.offsetWidth + 24;
+            container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        }
+    </script>
+}

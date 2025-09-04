@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Film>
+
+@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/index.css" />
+}
+
+<div class="home-container">
+    <div style="text-align:center; margin-top:32px;">
+        <img src="~/images/bk-logo.jpg" alt="BK" style="width:80px; margin-bottom:16px;" />
+    </div>
+    <h1 class="home-title">Ne izleyeceğini bilmiyor musun?</h1>
+    <div class="home-desc">
+        Bikamovie'ye hoş geldiniz! Yeni filmler keşfetmek için menüyü kullanabilirsiniz.
+    </div>
+
+    <h2 class="recommend-title">BIKA'DAN ÖNERİLER</h2>
+    <div class="recommend-grid">
+        @foreach (var film in Model)
+        {
+            <a href="@Url.Action("Detay", "Movie", new { id = film.Id })" class="recommend-card" style="text-decoration:none;">
+                <img src="@film.GorselUrl" alt="@film.Ad" />
+                <div class="recommend-card-title">@film.Ad</div>
+            </a>
+        }
+    </div>
+</div>

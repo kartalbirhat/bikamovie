@@ -1,0 +1,32 @@
+@model bikamovie.Models.LoginModel
+@{
+    ViewData["Title"] = "Giriþ Yap";
+}
+<link rel="stylesheet" href="~/css/index.css" />
+
+<div class="login-center">
+    <div class="login-card">
+        <div class="login-header">
+            <img src="~/images/bikamovie.png" alt="Giriþ Yap" class="login-logo" />
+            <h3 class="login-title">Giriþ Yap</h3>
+            <p class="login-desc">Hesabýnýza giriþ yapýn.</p>
+        </div>
+        <form method="post" class="login-form">
+            <div class="login-group">
+                <label asp-for="Username" class="login-label">Kullanýcý Adý</label>
+                <input asp-for="Username" class="login-input" autocomplete="username" placeholder="Kullanýcý Adý" />
+                <span asp-validation-for="Username" class="login-validation"></span>
+            </div>
+            <div class="login-group">
+                <label asp-for="Password" class="login-label">Þifre</label>
+                <input asp-for="Password" class="login-input" type="password" autocomplete="current-password" placeholder="Þifre" />
+                <span asp-validation-for="Password" class="login-validation"></span>
+            </div>
+            <button type="submit" class="login-btn">Giriþ Yap</button>
+            <div asp-validation-summary="ModelOnly" class="login-validation-summary"></div>
+        </form>
+        <div class="login-footer">
+            <a href="/Account/Register" class="login-link">Hesabýnýz yok mu? Kayýt Olun</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+﻿@model Dictionary<string, List<bikamovie.Models.Film>>
+
+@{
+    ViewData["Title"] = "Kategoriler";
+    var kategoriQuery = Context.Request.Query["kategori"].ToString();
+}
+
+<link rel="stylesheet" href="~/css/kategoriler.css" />
+
+@if (!string.IsNullOrEmpty(kategoriQuery) && Model.Count == 1)
+{
+    var kategori = Model.First();
+    <div class="kategori-section">
+        <div class="kategori-title">@kategori.Key Filmleri</div>
+        <div class="kategoriler-grid">
+            @foreach (var film in kategori.Value)
+            {
+                <a href="@Url.Action("Detay", "Movie", new { id = film.Id })" class="kategori-card">
+                    <img src="@(film.GorselUrl.StartsWith("http") || film.GorselUrl.StartsWith("/") ? film.GorselUrl : Url.Content("~/images/" + film.GorselUrl))"
+                         alt="@film.Ad" />
+                    <div>@film.Ad</div>
+                </a>
+            }
+        </div>
+    </div>
+}
+else
+{
+    foreach (var kategori in Model)
+    {
+        <div class="kategori-section">
+            <div class="kategori-title">
+                <a href="@Url.Action("Kategoriler", "Movie", new { kategori = kategori.Key })" class="kategori-link">
+                    @kategori.Key Filmleri
+                </a>
+            </div>
+            <div class="carousel-outer">
+                @{
+                    var safeKey = kategori.Key.Replace(" ", "_");
+                }
+                <button class="carousel-arrow left" onclick="scrollCarousel('@safeKey', -2)">&lt;</button>
+                <div class="carousel" id="carousel-@safeKey">
+                    @foreach (var film in kategori.Value)
+                    {
+                        <a href="@Url.Action("Detay", "Movie", new { id = film.Id })" class="kategori-card">
+                            <img src="@(film.GorselUrl.StartsWith("http") || film.GorselUrl.StartsWith("/") ? film.GorselUrl : Url.Content("~/images/" + film.GorselUrl))"
+                                 alt="@film.Ad" />
+                            <div>@film.Ad</div>
+                        </a>
+                    }
+                </div>
+                <button class="carousel-arrow right" onclick="scrollCarousel('@safeKey', 2)">&gt;</button>
+            </div>
+        </div>
+    }
+}
+@section Scripts {
+    <script src="~/js/kategoriler.js"></script>
+}
