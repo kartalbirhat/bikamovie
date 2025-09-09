@@ -28,10 +28,19 @@ Bikamovie, kullanıcıların filmleri kategorilere göre keşfedebileceği, deta
 
 Aşağıda projenin arayüzüne dair örnek ekran görüntüleri bulabilirsiniz:
 
+## Ana Sayfa
 ![Ana Sayfa](screenshots/ana-sayfa.png)
+
+## Kategoriler
 ![Kategoriler](screenshots/kategoriler.png)
+
+## Film Detayı
 ![Film detayı](screenshots/detay.png)
+
+## Yorumlar
 ![Yorumlar](screenshots/yorumlar.png)
+
+## Profil
 ![Profil](screenshots/profil.png)
 
 ## Kurucu
